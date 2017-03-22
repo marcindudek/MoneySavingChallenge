@@ -22,9 +22,15 @@
             android:id="@+id/linear_new_challenge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp" >
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:weightSum="1">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.75">
             <TextView
                 android:text="@string/label_new_challenge"
                 android:layout_width="match_parent"
@@ -33,7 +39,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:fontFamily="sans-serif"
                 android:paddingBottom="8dp"
-                android:paddingTop="16dp"
                 android:textSize="14sp" />
 
             <android.support.design.widget.TextInputLayout
@@ -51,21 +56,21 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="@string/hint_target_new_challenge"
-                android:id="@+id/til_target">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/target"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:hint="@string/hint_target_new_challenge"
+                    android:id="@+id/til_target">
 
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/target"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+                <android.support.design.widget.TextInputLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/hint_weeks_new_challenge"
@@ -78,30 +83,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
             <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal" >
-            <Button
-                android:id="@+id/advanced_btn"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginTop="16dp"
-                android:text="@string/button_advanced_settings_new_challenge" />
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.25">
+                <Button
+                    android:id="@+id/advanced_btn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/button_advanced_settings_new_challenge" />
 
-            <Button
-                android:id="@+id/apply_btn"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="16dp"
-                android:text="@string/button_apply_new_challenge" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/apply_btn"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/button_apply_new_challenge" />
+            </LinearLayout>
 
         </LinearLayout>
 

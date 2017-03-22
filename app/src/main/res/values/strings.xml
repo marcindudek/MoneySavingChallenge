@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">MoneySavingChallenge</string>
+    <string name="app_name">Money Saving Challenge</string>
+    <string name="label_new_challenge">Nowe wyzwanie</string>
+    <string name="hint_amount_new_challenge">Kwota</string>
+    <string name="hint_target_new_challenge">Cel (opcjonalnie)</string>
+    <string name="hint_weeks_new_challenge">Liczba tygodni na wykonanie celu</string>
+    <string name="default_amount_new_challenge">1000</string>
+    <string name="default_weeks_new_challenge">12</string>
+    <string name="button_apply_new_challenge">Rozpocznij</string>
+    <string name="button_advanced_settings_new_challenge">Dostosuj</string>
+    <string name="label_intro">Czym jest Money Saving Challenge?</string>
+    <string name="button_cancel">Anuluj</string>
+
+    <string name="content_intro">
+        Money Saving Challenge ma pomóc Ci w regularnym oszczędzaniu pieniędzy na cel, który sobie wyznaczysz.
+        Na podstawie kwoty i czasu, w jakim chcesz uzbierać wybraną sumę, aplikacja wyznaczy kwoty, jakie trzeba co tydzień odłozyć.
+        Ustawiając cel, możesz też ręcznie ustalić tygodniowe składki. Po wystartowaniu wyzwania, raz w tygodniu pojawią się przypomnienia z kwotą do odłożenia.
+    </string>
+
+
 </resources>
