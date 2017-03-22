@@ -4,7 +4,7 @@
     <string name="hint_amount_new_challenge">Kwota</string>
     <string name="hint_target_new_challenge">Cel (opcjonalnie)</string>
     <string name="hint_weeks_new_challenge">Liczba tygodni na wykonanie celu</string>
-    <string name="default_amount_new_challenge">1000</string>
+    <string name="default_amount_new_challenge">500</string>
     <string name="default_weeks_new_challenge">12</string>
     <string name="button_apply_new_challenge">Rozpocznij</string>
     <string name="button_advanced_settings_new_challenge">Dostosuj</string>
