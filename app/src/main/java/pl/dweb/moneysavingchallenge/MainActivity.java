@@ -1,6 +1,7 @@
 package pl.dweb.moneysavingchallenge;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static pl.dweb.moneysavingchallenge.ChallengeActivity.CURRENT_CHALLENGE;
+import static pl.dweb.moneysavingchallenge.ChallengeActivity.SHARED_PREFERENCES_NAME;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "pl.dweb.moneysavingchallenge";
@@ -22,16 +26,25 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.amount)
     protected TextInputEditText amountField;
 
+    @BindView(R.id.purpose)
+    protected TextInputEditText purposeField;
+
     @BindView(R.id.week_spinner)
     protected Spinner weekSpinner;
 
     private int weeks;
+    private SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        preferences = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+        if(preferences.contains(CURRENT_CHALLENGE)) {
+            startChallenge();
+        }
         ArrayAdapter<CharSequence> weeksAdapter = ArrayAdapter.createFromResource(this, R.array.weeks, android.R.layout.simple_spinner_item);
         weeksAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weekSpinner.setAdapter(weeksAdapter);
@@ -51,15 +64,16 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.apply_btn)
     public void startChallenge() {
 
-        if(!TextUtils.isEmpty(amountField.getText())) {
+        Intent intent = new Intent(this, ChallengeActivity.class);
+        if(weeks > 0) {
             int amount = Integer.valueOf(amountField.getText().toString());
 
-            Intent intent = new Intent(this, ChallengeActivity.class);
             intent.putExtra(TAG + "/weeks", weeks);
             intent.putExtra(TAG + "/amount", amount);
-            startActivity(intent);
+            intent.putExtra(TAG + "/purpose", purposeField.toString());
         }
-
+        startActivity(intent);
+        finish();
     }
 
     @OnClick(R.id.advanced_btn)
@@ -74,5 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, IntroductionActivity.class);
         startActivity(intent);
     }
+
+
 
 }

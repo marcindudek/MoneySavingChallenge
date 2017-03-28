@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdvancedSettingsActivity" />
-        <activity android:name=".IntroductionActivity" />
-        <activity android:name=".ChallengeActivity"></activity>
+        <activity android:name=".AdvancedSettingsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".IntroductionActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ChallengeActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

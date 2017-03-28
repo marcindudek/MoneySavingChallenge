@@ -55,10 +55,10 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/hint_target_new_challenge"
-                android:id="@+id/til_target">
+                android:id="@+id/til_purpose">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/target"
+                    android:id="@+id/purpose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
