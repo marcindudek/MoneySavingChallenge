@@ -2,7 +2,12 @@ package pl.dweb.moneysavingchallenge;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +20,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
 
 import static pl.dweb.moneysavingchallenge.ChallengeActivity.CURRENT_CHALLENGE;
 import static pl.dweb.moneysavingchallenge.ChallengeActivity.SHARED_PREFERENCES_NAME;
@@ -23,17 +29,15 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "pl.dweb.moneysavingchallenge";
 
-    @BindView(R.id.amount)
-    protected TextInputEditText amountField;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.pager_view)
+    ViewPager viewPager;
 
-    @BindView(R.id.purpose)
-    protected TextInputEditText purposeField;
-
-    @BindView(R.id.week_spinner)
-    protected Spinner weekSpinner;
-
-    private int weeks;
+    public static final String SHARED_PREFERENCES_NAME = "msc.preferences";
+    public static final String CURRENT_CHALLENGE = "current_challenge";
     private SharedPreferences preferences;
+
 
 
     @Override
@@ -41,54 +45,60 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
         preferences = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-        if(preferences.contains(CURRENT_CHALLENGE)) {
-            startChallenge();
+        int startPosition = (preferences.contains(CURRENT_CHALLENGE)) ? 1 : 0;
+        viewPager.setCurrentItem(startPosition);
+
+    }
+
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+
+    class MyAdapter extends FragmentPagerAdapter {
+
+        private FragmentManager fragmentManager;
+
+
+
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
+            fragmentManager = fm;
         }
-        ArrayAdapter<CharSequence> weeksAdapter = ArrayAdapter.createFromResource(this, R.array.weeks, android.R.layout.simple_spinner_item);
-        weeksAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        weekSpinner.setAdapter(weeksAdapter);
-        weekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position > 0) weeks = (position)*4;
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: return new NewChallengeFragment();
+                case 1: return new ChallengeFragment();
+                case 2: return new HistoryFragment();
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    @OnClick(R.id.apply_btn)
-    public void startChallenge() {
-
-        Intent intent = new Intent(this, ChallengeActivity.class);
-        if(weeks > 0) {
-            int amount = Integer.valueOf(amountField.getText().toString());
-
-            intent.putExtra(TAG + "/weeks", weeks);
-            intent.putExtra(TAG + "/amount", amount);
-            intent.putExtra(TAG + "/purpose", purposeField.toString());
+            throw new RuntimeException("coś poszło nie tak");
         }
-        startActivity(intent);
-        finish();
-    }
 
-    @OnClick(R.id.advanced_btn)
-    public void advancedSettings() {
-        Integer i = Integer.valueOf(amountField.getText().toString());
-        i += 500;
-        amountField.setText(i.toString());
-    }
+        @Override
+        public int getCount() {
+            return 3;
+        }
 
-    @OnClick(R.id.fab)
-    public void introduction() {
-        Intent intent = new Intent(this, IntroductionActivity.class);
-        startActivity(intent);
-    }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0: return getResources().getString(R.string.new_challenge_label);
+                case 1: return getResources().getString(R.string.current_challenge_label);
+                case 2: return getResources().getString(R.string.history_label);
+            }
+            throw new RuntimeException("coś poszło nie tak");
+        }
 
+
+
+
+    }
 
 
 }
