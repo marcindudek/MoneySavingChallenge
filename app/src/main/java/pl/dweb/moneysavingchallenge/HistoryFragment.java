@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class HistoryFragment extends Fragment {
     private DBHelper dbHelper;
     private Dao<ChallengeEntity, Integer> challengeDao;
     private Dao<DueEntity, Long> dueDao;
+    private EventBus bus = EventBus.getDefault();
+    ChallengesAdapter adapter;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -56,13 +61,34 @@ public class HistoryFragment extends Fragment {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ChallengesAdapter adapter = new ChallengesAdapter(history);
+        adapter = new ChallengesAdapter(history);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
         return v;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        bus.register(this);
+
+    }
+
+    @Override
+    public void onStop() {
+        bus.unregister(this);
+        super.onStop();
+    }
+
+    @Subscribe
+    public void challengeFinished(boolean finished) {
+        if(finished) {
+            adapter.notifyDataSetChanged();
+        }
+
     }
 
 }

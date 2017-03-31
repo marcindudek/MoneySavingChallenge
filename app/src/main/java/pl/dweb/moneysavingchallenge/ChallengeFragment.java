@@ -4,7 +4,6 @@ package pl.dweb.moneysavingchallenge;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +40,16 @@ public class ChallengeFragment extends Fragment {
 
 
     @BindView(R.id.percent)
-    TextView textView;
+    TextView percentField;
+
+    @BindView(R.id.empty_challenge)
+    TextView emptyChallengeField;
 
     @BindView(R.id.dues_linear_layout)
     com.wefika.flowlayout.FlowLayout linear;
+
+    @BindView(R.id.progressBar)
+    CircularProgressBar progressBar;
 
     private DBHelper dbHelper;
     private Dao<ChallengeEntity, Integer> challengeDao;
@@ -54,6 +59,7 @@ public class ChallengeFragment extends Fragment {
     private SharedPreferences preferences;
     private Integer amount;
     private EventBus bus = EventBus.getDefault();
+    private boolean finished = false;
 
     public ChallengeFragment() {
         // Required empty public constructor
@@ -67,8 +73,6 @@ public class ChallengeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_challenge, container, false);
 
         ButterKnife.bind(this, v);
-
-        bus.register(this);
 
         try{
             dbHelper = OpenHelperManager.getHelper(getContext(), DBHelper.class);
@@ -97,18 +101,31 @@ public class ChallengeFragment extends Fragment {
 
         generateButtons(dues);
 
-        textView.setText(calculateSavedPercent() +"%");
+        percentField.setText(calculateSavedPercent() +"%");
 
 
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        bus.register(this);
+
+    }
+
+    @Override
+    public void onStop() {
+        bus.unregister(this);
+        super.onStop();
+    }
+
     @Subscribe
     public void challengeAvailable(ChallengeEntity challengeEntity) {
-        List<DueEntity> dues = new ArrayList<>();
         if(challenge != null) {
             return;
         }
+        List<DueEntity> dues = new ArrayList<>();
             challenge = challengeEntity;
             amount = challengeEntity.getAmount();
         try {
@@ -118,6 +135,9 @@ public class ChallengeFragment extends Fragment {
         }
         editPreferences(challenge.getId());
         dues = createDues(challenge.getAmount(), challenge.getDues());
+        finished = false;
+        percentField.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         generateButtons(dues);
         calculateSavedPercent();
 
@@ -135,16 +155,10 @@ public class ChallengeFragment extends Fragment {
         }
 
         result = result * 100 / amount;
-        textView.setText(result +"%");
-
+        percentField.setText(result +"%");
+        progressBar.setProgressWithAnimation(result);
         if(result == 100) {
-            try {
-                challenge.setFinishTimestamp(new Date());
-                challengeDao.update(challenge);
-                finishChallenge();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            finishChallenge();
         }
         return result;
 
@@ -159,7 +173,18 @@ public class ChallengeFragment extends Fragment {
     private void finishChallenge() {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(CURRENT_CHALLENGE);
+//        percentField.setVisibility(View.INVISIBLE);
+//        progressBar.setVisibility(View.INVISIBLE);
         editor.commit();
+        try {
+            challenge.setFinishTimestamp(new Date());
+            challengeDao.update(challenge);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finished = true;
+        bus.post(finished);
+        challenge = null;
     }
 
     private List<DueEntity> createDues(Integer amount, Integer weeks) {
@@ -229,6 +254,8 @@ public class ChallengeFragment extends Fragment {
     }
 
     private void generateButtons(final List<DueEntity> dues) {
+        linear.removeAllViewsInLayout();
+        emptyChallengeField.setVisibility(View.INVISIBLE);
         for(final DueEntity d : dues){
             Button button = new Button(new android.view.ContextThemeWrapper(getContext(),
                     android.R.style.Widget_Material_Button_Colored),
