@@ -1,6 +1,10 @@
 package pl.dweb.moneysavingchallenge;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -65,7 +69,7 @@ public class NewChallengeFragment extends Fragment {
         weekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position > 0) weeks = (position)*4;
+                weeks = (position+1)*4;
             }
 
             @Override
@@ -76,7 +80,6 @@ public class NewChallengeFragment extends Fragment {
 
         return v;
     }
-
 
 
     @OnClick(R.id.apply_btn)

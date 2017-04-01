@@ -62,11 +62,11 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:hint="@string/hint_weeks_new_challenge"
-                android:id="@+id/til_weeks">
+                android:id="@+id/til_weeks" />
 
                 <Spinner
                     android:id="@+id/week_spinner"
@@ -74,7 +74,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-            </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -89,6 +88,14 @@
                     android:layout_gravity="left"
                     android:layout_marginTop="16dp"
                     android:text="@string/button_advanced_settings_new_challenge" />
+                <Button
+                    android:id="@+id/notify_btn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="16dp"
+                    android:text="notify" />
 
                 <Button
                     android:id="@+id/apply_btn"
