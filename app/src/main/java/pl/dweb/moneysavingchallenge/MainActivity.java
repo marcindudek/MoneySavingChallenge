@@ -1,5 +1,7 @@
 package pl.dweb.moneysavingchallenge;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
@@ -17,9 +19,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.Trigger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String SHARED_PREFERENCES_NAME = "msc.preferences";
     public static final String CURRENT_CHALLENGE = "current_challenge";
     private SharedPreferences preferences;
-    FirebaseJobDispatcher dispatcher;
 
 
     @Override
@@ -55,9 +59,12 @@ public class MainActivity extends AppCompatActivity {
         preferences = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
         int startPosition = (preferences.contains(CURRENT_CHALLENGE)) ? 1 : 0;
         viewPager.setCurrentItem(startPosition);
-        dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
 
-        Job notificationService = dispatcher.newJobBuilder()
+        Intent intent = new Intent(this, Receiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+        am.setRepeating(am.RTC_WAKEUP, System.currentTimeMillis(), am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+
 
     }
 

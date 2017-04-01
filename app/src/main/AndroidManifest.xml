@@ -27,6 +27,7 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>
         </service>
+        <receiver android:name="pl.dweb.moneysavingchallenge.Receiver"></receiver>
 
     </application>
 
