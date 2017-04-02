@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -36,7 +37,7 @@ import static pl.dweb.moneysavingchallenge.MainActivity.TAG;
 public class NewChallengeFragment extends Fragment {
 
     @BindView(R.id.amount)
-    protected TextInputEditText amountField;
+    protected TextView amountField;
 
     @BindView(R.id.purpose)
     protected TextInputEditText purposeField;
@@ -93,10 +94,19 @@ public class NewChallengeFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.advanced_btn)
-    public void advancedSettings() {
+    @OnClick(R.id.increase_amount_btn)
+    public void increaseAmount() {
         Integer i = Integer.valueOf(amountField.getText().toString());
         i += 500;
+        amountField.setText(i.toString());
+    }
+
+    @OnClick(R.id.decrease_amount_btn)
+    public void decreaseAmount() {
+        Integer i = Integer.valueOf(amountField.getText().toString());
+        if(i > 500) {
+            i -= 500;
+        }
         amountField.setText(i.toString());
     }
 

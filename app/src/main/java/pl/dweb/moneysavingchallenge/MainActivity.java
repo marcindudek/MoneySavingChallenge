@@ -60,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
         int startPosition = (preferences.contains(CURRENT_CHALLENGE)) ? 1 : 0;
         viewPager.setCurrentItem(startPosition);
 
-        Intent intent = new Intent(this, Receiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-        am.setRepeating(am.RTC_WAKEUP, System.currentTimeMillis(), am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+//        Intent intent = new Intent(this, Receiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+//        am.setRepeating(am.RTC_WAKEUP, System.currentTimeMillis(), am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
 
 
     }

@@ -19,5 +19,6 @@
         Na podstawie kwoty i czasu, w jakim chcesz uzbierać wybraną sumę, aplikacja wyznaczy kwoty, jakie trzeba co tydzień odłozyć.
         Ustawiając cel, możesz też ręcznie ustalić tygodniowe składki. Po wystartowaniu wyzwania, raz w tygodniu pojawią się przypomnienia z kwotą do odłożenia.
     </string>
+    <string name="target_show_label">Cel:</string>
 
 </resources>

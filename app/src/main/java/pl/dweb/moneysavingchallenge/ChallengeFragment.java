@@ -42,6 +42,15 @@ public class ChallengeFragment extends Fragment {
     @BindView(R.id.percent)
     TextView percentField;
 
+    @BindView(R.id.purpose_show)
+    TextView purposeField;
+
+    @BindView(R.id.saved_show)
+    TextView savedSumField;
+
+    @BindView(R.id.amount_show)
+    TextView amountField;
+
     @BindView(R.id.empty_challenge)
     TextView emptyChallengeField;
 
@@ -100,7 +109,8 @@ public class ChallengeFragment extends Fragment {
         }
 
         generateButtons(dues);
-
+        purposeField.setText(challenge.getPurpose());
+        amountField.setText(amount.toString());
         percentField.setText(calculateSavedPercent() +"%");
 
 
@@ -137,6 +147,8 @@ public class ChallengeFragment extends Fragment {
         dues = createDues(challenge.getAmount(), challenge.getDues());
         finished = false;
         percentField.setVisibility(View.VISIBLE);
+        amountField.setText(amount.toString());
+        purposeField.setText(challenge.getPurpose());
         progressBar.setVisibility(View.VISIBLE);
         generateButtons(dues);
         calculateSavedPercent();
@@ -154,6 +166,7 @@ public class ChallengeFragment extends Fragment {
             e.printStackTrace();
         }
 
+        savedSumField.setText(result.toString());
         result = result * 100 / amount;
         percentField.setText(result +"%");
         progressBar.setProgressWithAnimation(result);
