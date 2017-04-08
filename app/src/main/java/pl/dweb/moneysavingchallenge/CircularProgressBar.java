@@ -26,7 +26,7 @@ public class CircularProgressBar extends View {
      * Start the progress at 12 o'clock
      */
     private int startAngle = -90;
-    private int color = Color.DKGRAY;
+    private int color = R.color.colorAccent;
     private RectF rectF;
     private Paint backgroundPaint;
     private Paint foregroundPaint;
@@ -50,7 +50,7 @@ public class CircularProgressBar extends View {
         //Reading values from the XML layout
         try {
             progress = typedArray.getFloat(R.styleable.CircleProgressBar_progress, progress);
-            color = typedArray.getInt(R.styleable.CircleProgressBar_progressbarColor, color);
+//            color = typedArray.getInt(R.styleable.CircleProgressBar_progressbarColor, color);
             min = typedArray.getInt(R.styleable.CircleProgressBar_min, min);
             max = typedArray.getInt(R.styleable.CircleProgressBar_max, max);
         } finally {
@@ -62,7 +62,7 @@ public class CircularProgressBar extends View {
         backgroundPaint.setStyle(Paint.Style.STROKE);
 
         foregroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        foregroundPaint.setColor(color);
+        foregroundPaint.setColor(getResources().getColor(color));
         foregroundPaint.setStyle(Paint.Style.STROKE);
     }
 

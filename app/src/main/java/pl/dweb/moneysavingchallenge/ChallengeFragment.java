@@ -4,6 +4,7 @@ package pl.dweb.moneysavingchallenge;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
-import com.wefika.flowlayout.FlowLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,8 +24,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pl.dweb.moneysavingchallenge.database.DBHelper;
 import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
+import pl.dweb.moneysavingchallenge.model.ChallengeFinisher;
 import pl.dweb.moneysavingchallenge.model.DueEntity;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -42,29 +44,57 @@ public class ChallengeFragment extends Fragment {
     @BindView(R.id.percent)
     TextView percentField;
 
+    @BindView(R.id.empty_info)
+    TextView emptyInfoField;
+
     @BindView(R.id.purpose_show)
     TextView purposeField;
 
     @BindView(R.id.saved_show)
     TextView savedSumField;
 
-    @BindView(R.id.amount_show)
+    @BindView(R.id.date_start_show)
     TextView amountField;
-
-    @BindView(R.id.empty_challenge)
-    TextView emptyChallengeField;
-
-    @BindView(R.id.dues_linear_layout)
-    com.wefika.flowlayout.FlowLayout linear;
 
     @BindView(R.id.progressBar)
     CircularProgressBar progressBar;
 
-    private DBHelper dbHelper;
-    private Dao<ChallengeEntity, Integer> challengeDao;
-    private Dao<DueEntity, Long> dueDao;
-    private ChallengeEntity challenge;
+    @BindView(R.id.current_due_show)
+    TextView currentDueField;
 
+    @BindView(R.id.all_dues_show)
+    TextView allDuesField;
+
+    @BindView(R.id.due_amount)
+    TextView dueAmountField;
+
+    @BindView(R.id.purpose_label)
+    TextView purposeLabelField;
+
+    @BindView(R.id.due_label)
+    TextView dueLabelField;
+
+    @BindView(R.id.saved_label)
+    TextView savedLabelField;
+
+    @BindView(R.id.amount_label)
+    TextView amountLabelField;
+
+    @BindView(R.id.current_due_label)
+    TextView currentDueLabelField;
+
+    @BindView(R.id.due_separator)
+    TextView dueSeparatorField;
+
+    @BindView(R.id.week_1_buton)
+    Button weekButton1;
+
+    private Integer index;
+    private DBHelper dbHelper;
+    private static Dao<ChallengeEntity, Integer> challengeDao;
+    private Dao<DueEntity, Long> dueDao;
+    private static ChallengeEntity challenge;
+    private List<DueEntity> dues;
     private SharedPreferences preferences;
     private Integer amount;
     private EventBus bus = EventBus.getDefault();
@@ -91,30 +121,98 @@ public class ChallengeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        List<DueEntity> dues = new ArrayList<>();
-
         preferences = getContext().getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
         int id = preferences.getInt(CURRENT_CHALLENGE, 0);
 
         if(id == 0) {
+            setEmptyView();
             return v;
         }
 
         try {
             challenge = challengeDao.queryForId(id);
             dues = dueDao.queryForEq("challenge_id", id);
-            amount = challenge.getAmount();
         } catch (SQLException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
 
-        generateButtons(dues);
-        purposeField.setText(challenge.getPurpose());
-        amountField.setText(amount.toString());
-        percentField.setText(calculateSavedPercent() +"%");
-
-
+        if(challenge == null) {
+            finishChallenge();
+            getActivity().getParent().recreate();
+        }
+        prepareView();
+        restoreProgress();
         return v;
+    }
+
+    private void setEmptyView() {
+        emptyInfoField.setVisibility(View.VISIBLE);
+        percentField.setVisibility(View.INVISIBLE);
+        purposeField.setVisibility(View.INVISIBLE);
+        savedSumField.setVisibility(View.INVISIBLE);
+        amountField.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+        currentDueField.setVisibility(View.INVISIBLE);
+        allDuesField.setVisibility(View.INVISIBLE);
+        dueAmountField.setVisibility(View.INVISIBLE);
+        purposeLabelField.setVisibility(View.INVISIBLE);
+        dueLabelField.setVisibility(View.INVISIBLE);
+        weekButton1.setVisibility(View.INVISIBLE);
+        savedLabelField.setVisibility(View.INVISIBLE);
+        amountLabelField.setVisibility(View.INVISIBLE);
+        currentDueLabelField.setVisibility(View.INVISIBLE);
+        dueSeparatorField.setVisibility(View.INVISIBLE);
+    }
+
+    private void setChallengeView() {
+        emptyInfoField.setVisibility(View.INVISIBLE);
+        percentField.setVisibility(View.VISIBLE);
+        purposeField.setVisibility(View.VISIBLE);
+        savedSumField.setVisibility(View.VISIBLE);
+        amountField.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        currentDueField.setVisibility(View.VISIBLE);
+        allDuesField.setVisibility(View.VISIBLE);
+        dueAmountField.setVisibility(View.VISIBLE);
+        purposeLabelField.setVisibility(View.VISIBLE);
+        dueLabelField.setVisibility(View.VISIBLE);
+        weekButton1.setVisibility(View.VISIBLE);
+        savedLabelField.setVisibility(View.VISIBLE);
+        amountLabelField.setVisibility(View.VISIBLE);
+        currentDueLabelField.setVisibility(View.VISIBLE);
+        dueSeparatorField.setVisibility(View.VISIBLE);
+    }
+
+
+    private void prepareView() {
+        setChallengeView();
+        amount = challenge.getAmount();
+        index = 0;
+        generateButtons();
+        calculateSavedPercent();
+        if(TextUtils.isEmpty(challenge.getPurpose())) {
+            purposeLabelField.setVisibility(View.INVISIBLE);
+        } else {
+            purposeLabelField.setVisibility(View.VISIBLE);
+
+        }
+        dueLabelField.setVisibility(View.VISIBLE);
+        purposeField.setText(challenge.getPurpose());
+        amountField.setText(amount.toString() + " " + challenge.getCurrency());
+        percentField.setText(calculateSavedPercent() +"%");
+        dueAmountField.setText(dues.get(index).getDue() + " " + challenge.getCurrency());
+        currentDueField.setText(String.valueOf(index+1));
+        allDuesField.setText(String.valueOf(dues.size()));
+    }
+
+    private void restoreProgress() {
+        for(int i = 0; i < dues.size(); i++) {
+            if(dues.get(i).getTimestamp() != null) {
+                updateDues();
+            } else {
+                break;
+            }
+        }
     }
 
     @Override
@@ -130,14 +228,12 @@ public class ChallengeFragment extends Fragment {
         super.onStop();
     }
 
-    @Subscribe
+    @Subscribe(sticky = true)
     public void challengeAvailable(ChallengeEntity challengeEntity) {
-        if(challenge != null) {
-            return;
-        }
-        List<DueEntity> dues = new ArrayList<>();
+
             challenge = challengeEntity;
-            amount = challengeEntity.getAmount();
+
+            amount = challenge.getAmount();
         try {
             challengeDao.create(challenge);
         } catch (SQLException e) {
@@ -146,13 +242,22 @@ public class ChallengeFragment extends Fragment {
         editPreferences(challenge.getId());
         dues = createDues(challenge.getAmount(), challenge.getDues());
         finished = false;
-        percentField.setVisibility(View.VISIBLE);
-        amountField.setText(amount.toString());
-        purposeField.setText(challenge.getPurpose());
-        progressBar.setVisibility(View.VISIBLE);
-        generateButtons(dues);
-        calculateSavedPercent();
+        bus.removeStickyEvent(challengeEntity);
+        prepareView();
+    }
 
+    public static void cancelChallenge() {
+        challenge.setCanceled(true);
+        try {
+            challengeDao.update(challenge);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        challenge = null;
+    }
+
+    public static boolean isActiveChallenge() {
+        return challenge != null;
     }
 
     private Integer calculateSavedPercent() {
@@ -166,11 +271,12 @@ public class ChallengeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        savedSumField.setText(result.toString());
+        savedSumField.setText(result.toString() + " " + challenge.getCurrency());
         result = result * 100 / amount;
         percentField.setText(result +"%");
         progressBar.setProgressWithAnimation(result);
         if(result == 100) {
+            removeFromPreferences();
             finishChallenge();
         }
         return result;
@@ -184,20 +290,24 @@ public class ChallengeFragment extends Fragment {
     }
 
     private void finishChallenge() {
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove(CURRENT_CHALLENGE);
-//        percentField.setVisibility(View.INVISIBLE);
-//        progressBar.setVisibility(View.INVISIBLE);
-        editor.commit();
+        removeFromPreferences();
         try {
             challenge.setFinishTimestamp(new Date());
             challengeDao.update(challenge);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        finished = true;
-        bus.post(finished);
+        ChallengeFinisher finisher = new ChallengeFinisher(challenge.getId(), true);
+        bus.post(finisher);
+        dueLabelField.setVisibility(View.INVISIBLE);
+        dueAmountField.setText(getString(R.string.challenge_completed));
         challenge = null;
+    }
+
+    private void removeFromPreferences() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(CURRENT_CHALLENGE);
+        editor.commit();
     }
 
     private List<DueEntity> createDues(Integer amount, Integer weeks) {
@@ -266,32 +376,65 @@ public class ChallengeFragment extends Fragment {
 
     }
 
-    private void generateButtons(final List<DueEntity> dues) {
-        linear.removeAllViewsInLayout();
-        emptyChallengeField.setVisibility(View.INVISIBLE);
-        for(final DueEntity d : dues){
-            Button button = new Button(new android.view.ContextThemeWrapper(getContext(),
-                    android.R.style.Widget_Material_Button_Colored),
-                    null,
-                    android.R.style.Widget_Material_Button_Colored);
-            button.setLayoutParams(new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT));
-            button.setText(d.getDue().toString());
-            button.setId(d.getDueNumber());
-            button.setEnabled(d.getTimestamp() == null);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        d.setTimestamp(new Date());
-                        dueDao.update(d);
-                        v.setEnabled(false);
-                        calculateSavedPercent();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+    private void generateButtons() {
+        weekButton1.setClickable(true);
+        weekButton1.setBackground(getResources().getDrawable(R.drawable.round_button));
+//                    v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        weekButton1.setPressed(false);
+
+        weekButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateDues();
+                if(index < dues.size()) {
+//                    Intent intent = new Intent(getContext(), Receiver.class);
+//                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+//                    AlarmManager am = (AlarmManager)getContext().getSystemService(ALARM_SERVICE);
+//                    am.set(am.RTC_WAKEUP, am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+                } else {
+                    v.setClickable(false);
+                    v.setBackground(getResources().getDrawable(R.drawable.round_complete_button));
+//                    v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    v.setPressed(true);
                 }
-            });
-            linear.addView(button);
+            }
+        });
+
+
+
+    }
+
+    @OnClick(R.id.week_1_buton)
+    public void clicked() {
+        updateDues();
+        if(index < dues.size()) {
+//            Intent intent = new Intent(getContext(), Receiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+//            AlarmManager am = (AlarmManager)getContext().getSystemService(ALARM_SERVICE);
+//            am.set(am.RTC_WAKEUP, am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        } else {
+            weekButton1.setText("Challenge completed!");
+            weekButton1.setClickable(false);
+            weekButton1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            weekButton1.setPressed(true);
+        }
+    }
+
+
+    private void updateDues() {
+        try {
+            dues.get(index).setTimestamp(new Date());
+            dueDao.update(dues.get(index));
+            calculateSavedPercent();
+            index++;
+            if(index < dues.size()) {
+                dueAmountField.setText(dues.get(index).getDue() + " " + challenge.getCurrency());
+                currentDueField.setText(dues.get(index).getDueNumber().toString());
+            }
+
+            allDuesField.setText(String.valueOf(dues.size()));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

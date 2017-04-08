@@ -3,22 +3,43 @@
     <string name="label_new_challenge">Nowe wyzwanie</string>
     <string name="hint_amount_new_challenge">Kwota</string>
     <string name="hint_target_new_challenge">Cel (opcjonalnie)</string>
-    <string name="hint_weeks_new_challenge">Liczba tygodni na wykonanie celu</string>
-    <string name="default_amount_new_challenge">500</string>
+    <string name="hint_weeks_new_challenge">Liczba składek</string>
+    <string name="hint_currency_new_challenge">Waluta</string>
+    <string name="default_amount_new_challenge">1000</string>
     <string name="default_weeks_new_challenge">12</string>
     <string name="button_apply_new_challenge">Rozpocznij</string>
     <string name="button_advanced_settings_new_challenge">Dostosuj</string>
     <string name="label_intro">Czym jest Money Saving Challenge?</string>
     <string name="button_cancel">Anuluj</string>
-    <string name="new_challenge_label">Nowy challenge</string>
-    <string name="current_challenge_label">Obecny challenge</string>
+    <string name="new_challenge_label">Nowe wyzwanie</string>
+    <string name="current_challenge_label">Obecne wyzwanie</string>
     <string name="history_label">Historia</string>
-    <string name="no_active_challenge_label">Brak aktywnego challenge\'u</string>
+    <string name="no_active_challenge_label">Brak aktywnego wyzwania</string>
     <string name="content_intro">
         Money Saving Challenge ma pomóc Ci w regularnym oszczędzaniu pieniędzy na cel, który sobie wyznaczysz.
         Na podstawie kwoty i czasu, w jakim chcesz uzbierać wybraną sumę, aplikacja wyznaczy kwoty, jakie trzeba co tydzień odłozyć.
         Ustawiając cel, możesz też ręcznie ustalić tygodniowe składki. Po wystartowaniu wyzwania, raz w tygodniu pojawią się przypomnienia z kwotą do odłożenia.
     </string>
-    <string name="target_show_label">Cel:</string>
+    <string name="target_show_label"><u>Cel:</u></string>
+    <string name="amount_show_label_underline"><u>Kwota:</u></string>
+    <string name="amount_show_label">Kwota:</string>
+    <string name="saved_show_label"><u>Uzbierane:</u></string>
+    <string name="dues_label">Składki:</string>
+    <string name="current_due_label"><u>Składka:</u></string>
+    <string name="due_separator">/</string>
+    <string name="confirm_dialog_title">Nie ukończyłeś wyzwania</string>
+    <string name="confirm_dialog_content">Nie skończyłeś ostatniego wyzwania! Rozpocząć nowy mimo to?</string>
+    <string name="answer_yes">Tak</string>
+    <string name="answer_no">Nie</string>
+    <string name="date_start_label">Data rozpoczęcia:</string>
+    <string name="date_finish_label">Data zakończenia:</string>
+    <string name="history_detail_label">Wyzwanie #</string>
+    <string name="status_canceled">anulowane</string>
+    <string name="status_in_progress">w trakcie</string>
+    <string name="remove_alert_title">Usuwanie wyzwania</string>
+    <string name="remove_alert_content">Czy na pewno chcesz usunąć wyzwanie z historii?</string>
+    <string name="challenge_completed">Wyzwanie ukończone!</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

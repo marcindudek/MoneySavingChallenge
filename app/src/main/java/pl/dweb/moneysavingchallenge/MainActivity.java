@@ -31,20 +31,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
 
-import static pl.dweb.moneysavingchallenge.ChallengeActivity.CURRENT_CHALLENGE;
-import static pl.dweb.moneysavingchallenge.ChallengeActivity.SHARED_PREFERENCES_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "pl.dweb.moneysavingchallenge";
-
+    public static final String SHARED_PREFERENCES_NAME = "msc.preferences";
+    public static final String CURRENT_CHALLENGE = "current_challenge";
     @BindView(R.id.tab_layout)
+
     TabLayout tabLayout;
     @BindView(R.id.pager_view)
     ViewPager viewPager;
 
-    public static final String SHARED_PREFERENCES_NAME = "msc.preferences";
-    public static final String CURRENT_CHALLENGE = "current_challenge";
     private SharedPreferences preferences;
 
 

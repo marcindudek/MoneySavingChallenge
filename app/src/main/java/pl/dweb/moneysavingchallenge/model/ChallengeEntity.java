@@ -27,19 +27,26 @@ public class ChallengeEntity {
     @DatabaseField(columnName = "purpose")
     private String purpose;
 
+    @DatabaseField(columnName = "currency")
+    private String currency;
+
     @DatabaseField(columnName = "start")
     private Date startTimestamp;
 
     @DatabaseField(columnName = "finish")
     private Date finishTimestamp;
 
+    @DatabaseField(columnName = "canceled", defaultValue = "false")
+    private Boolean isCanceled;
+
     public ChallengeEntity() {
     }
 
-    public ChallengeEntity(Integer amount, Integer dues, String purpose) {
+    public ChallengeEntity(Integer amount, Integer dues, String purpose, String currency) {
         this.amount = amount;
         this.dues = dues;
         this.purpose = purpose;
+        this.currency = currency;
         this.startTimestamp = new Date();
     }
 
@@ -71,6 +78,14 @@ public class ChallengeEntity {
         this.purpose = purpose;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public Date getStartTimestamp() {
         return startTimestamp;
     }
@@ -81,5 +96,14 @@ public class ChallengeEntity {
 
     public void setFinishTimestamp(Date finishTimestamp) {
         this.finishTimestamp = finishTimestamp;
+    }
+
+
+    public Boolean getCanceled() {
+        return isCanceled;
+    }
+
+    public void setCanceled(Boolean canceled) {
+        isCanceled = canceled;
     }
 }
