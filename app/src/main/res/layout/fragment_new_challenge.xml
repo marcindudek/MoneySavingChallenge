@@ -33,39 +33,53 @@
                 android:paddingTop="16dp"
                 android:textSize="14sp" />
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-               >
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="0.97"
                     android:gravity="center_vertical"
                     android:inputType="number"
-                    android:text="@string/default_amount_new_challenge" />
+                    android:text="@string/default_amount_new_challenge"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/decrease_amount_btn"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="34dp"
-                    android:layout_height="33dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="right"
-                    android:layout_marginTop="16dp"
-                    android:text="-" />
+                    android:text="-"
+                    tools:layout_editor_absoluteY="0dp"
+                    app:layout_constraintRight_toLeftOf="@+id/increase_amount_btn"
+                    android:layout_marginRight="8dp" />
 
                 <Button
                     android:id="@+id/increase_amount_btn"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="38dp"
+                    android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="right"
-                    android:layout_marginTop="16dp"
-                    android:text="+" />
+                    android:text="+"
+                    android:textAlignment="center"
+                    tools:layout_editor_absoluteY="0dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="parent" />
 
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_height="wrap_content"

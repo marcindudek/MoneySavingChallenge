@@ -17,4 +17,14 @@
         <item>GBP</item>
     </string-array>
 
+    <string-array name="days_of_week">
+        <item value="1">Niedziela</item>
+        <item value="2">Poniedziałek</item>
+        <item value="3">Wtorek</item>
+        <item value="4">Środa</item>
+        <item value="5">Czwartek</item>
+        <item value="6">Piątek</item>
+        <item value="7">Sobota</item>
+    </string-array>
+
 </resources>

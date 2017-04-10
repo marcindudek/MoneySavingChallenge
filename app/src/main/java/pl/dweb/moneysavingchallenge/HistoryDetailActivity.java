@@ -1,11 +1,15 @@
 package pl.dweb.moneysavingchallenge;
 
+import android.content.Intent;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -44,6 +48,9 @@ public class HistoryDetailActivity extends AppCompatActivity {
     @BindView(R.id.detailRecycler)
     RecyclerView recyclerView;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private ChallengeEntity challenge;
     private DBHelper dbHelper;
     private Dao<ChallengeEntity, Integer> challengeDao;
@@ -55,6 +62,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_detail);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         if(getIntent().hasExtra("challenge_id")) {
             try {
                 dbHelper = OpenHelperManager.getHelper(this, DBHelper.class);
@@ -81,5 +89,24 @@ public class HistoryDetailActivity extends AppCompatActivity {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                startActivity(new Intent(this, IntroductionActivity.class));
+                break;
+            case R.id.action_search:
+//              startActivity(new Intent(this, SearchNewsActivity.class));
+                break;
+        }
+        return true;
     }
 }

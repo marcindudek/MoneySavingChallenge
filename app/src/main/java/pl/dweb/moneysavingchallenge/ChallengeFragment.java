@@ -1,6 +1,10 @@
 package pl.dweb.moneysavingchallenge;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +23,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -99,6 +104,10 @@ public class ChallengeFragment extends Fragment {
     private Integer amount;
     private EventBus bus = EventBus.getDefault();
     private boolean finished = false;
+    private boolean enabled;
+    private Intervals interval;
+    private int monthDay, weekDay, hour, minute;
+
 
     public ChallengeFragment() {
         // Required empty public constructor
@@ -122,6 +131,7 @@ public class ChallengeFragment extends Fragment {
         }
 
         preferences = getContext().getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+        readSettings();
         int id = preferences.getInt(CURRENT_CHALLENGE, 0);
 
         if(id == 0) {
@@ -204,6 +214,25 @@ public class ChallengeFragment extends Fragment {
         currentDueField.setText(String.valueOf(index+1));
         allDuesField.setText(String.valueOf(dues.size()));
     }
+
+    private void readSettings() {
+        enabled = preferences.getBoolean("enable_notifications", false);
+        switch(preferences.getInt("notifications_interval", -1)) {
+            case R.id.notify_monthly_radio:
+                interval = Intervals.MONTHLY;
+                break;
+            case R.id.notify_weekly_radio:
+                interval = Intervals.WEEKLY;
+                break;
+            default:
+                interval = Intervals.NONE;
+        }
+        monthDay = preferences.getInt("notification_monthday", -1);
+        weekDay = preferences.getInt("notification_weekday", -1);
+        hour = preferences.getInt("notifications_hour", -1);
+        minute = preferences.getInt("notifications_minute", -1);
+    }
+
 
     private void restoreProgress() {
         for(int i = 0; i < dues.size(); i++) {
@@ -407,17 +436,54 @@ public class ChallengeFragment extends Fragment {
     @OnClick(R.id.week_1_buton)
     public void clicked() {
         updateDues();
-        if(index < dues.size()) {
-//            Intent intent = new Intent(getContext(), Receiver.class);
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
-//            AlarmManager am = (AlarmManager)getContext().getSystemService(ALARM_SERVICE);
-//            am.set(am.RTC_WAKEUP, am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        if(index < dues.size() && enabled) {
+            setReminder();
         } else {
             weekButton1.setText("Challenge completed!");
             weekButton1.setClickable(false);
             weekButton1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             weekButton1.setPressed(true);
         }
+    }
+
+    private void setReminder() {
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Long alarmTime = null;
+        switch (interval) {
+            case WEEKLY:
+                alarmTime = calculateWeeklyTime();
+                break;
+            case MONTHLY:
+                alarmTime = calculateMonthlyTime();
+        }
+        Intent intent = new Intent(getContext(), Receiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        alarmManager.set(AlarmManager.RTC, alarmTime, pendingIntent);
+
+    }
+
+    private Long calculateWeeklyTime() {
+        Calendar calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+
+        int daysDiff = (currentDay < weekDay) ? (weekDay - currentDay) : currentDay + weekDay - 1;
+        calendar.add(Calendar.DAY_OF_MONTH, daysDiff);
+        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        return calendar.getTimeInMillis();
+    }
+
+    private Long calculateMonthlyTime() {
+        Calendar calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        if(currentDay < monthDay) {
+            calendar.add(Calendar.DAY_OF_MONTH, monthDay - currentDay);
+        } else {
+            calendar.set(Calendar.MONTH, (calendar.get(Calendar.MONTH) + 1));
+        }
+        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        return calendar.getTimeInMillis();
     }
 
 

@@ -5,6 +5,8 @@
     <string name="hint_target_new_challenge">Cel (opcjonalnie)</string>
     <string name="hint_weeks_new_challenge">Liczba składek</string>
     <string name="hint_currency_new_challenge">Waluta</string>
+    <string name="about_app">O aplikacji</string>
+    <string name="notify_settings">Ustaw powiadomienia</string>
     <string name="default_amount_new_challenge">1000</string>
     <string name="default_weeks_new_challenge">12</string>
     <string name="button_apply_new_challenge">Rozpocznij</string>
@@ -17,8 +19,8 @@
     <string name="no_active_challenge_label">Brak aktywnego wyzwania</string>
     <string name="content_intro">
         Money Saving Challenge ma pomóc Ci w regularnym oszczędzaniu pieniędzy na cel, który sobie wyznaczysz.
-        Na podstawie kwoty i czasu, w jakim chcesz uzbierać wybraną sumę, aplikacja wyznaczy kwoty, jakie trzeba co tydzień odłozyć.
-        Ustawiając cel, możesz też ręcznie ustalić tygodniowe składki. Po wystartowaniu wyzwania, raz w tygodniu pojawią się przypomnienia z kwotą do odłożenia.
+        Na podstawie kwoty i czasu, w jakim chcesz uzbierać wybraną sumę, aplikacja wyznacza wysokość składek, jakie trzeba co tydzień odłozyć.
+        Po wystartowaniu wyzwania, raz w tygodniu pojawią się przypomnienia z kwotą do odłożenia.
     </string>
     <string name="target_show_label"><u>Cel:</u></string>
     <string name="amount_show_label_underline"><u>Kwota:</u></string>
@@ -42,4 +44,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification_switch">Powiadomienia</string>
+    <string name="notify_weekly_radio">Co tydzień</string>
+    <string name="notify_monthly_radio">Co miesiąc</string>
+    <string name="notify_weekday_label">Wybierz dzień tygodnia</string>
+    <string name="notify_monthday_label">Wybierz dzień miesiąca</string>
+    <string name="notify_interval_label">Wybierz częstotliwość przypomnień</string>
+    <string name="notify_hour_label">Wybierz godzinę przypomnienia</string>
+    <string name="save_button">Zapisz</string>
 </resources>

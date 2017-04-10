@@ -22,7 +22,7 @@ public class NotificationService extends JobService {
         Notification notification = new Notification.Builder(this).setTicker("TickerTitle")
                 .setContentTitle("Content title")
                 .setContentText("Content Text")
-                .setSmallIcon(R.drawable.ic_help_black_24dp)
+                .setSmallIcon(R.drawable.ic_cup_with_star_icon)
                 .setContentIntent(pendingIntent).getNotification();
 
         notification.flags = Notification.FLAG_AUTO_CANCEL;
