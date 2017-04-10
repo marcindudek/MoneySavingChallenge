@@ -1,55 +1,54 @@
 <resources>
     <string name="app_name">Money Saving Challenge</string>
-    <string name="label_new_challenge">Nowe wyzwanie</string>
-    <string name="hint_amount_new_challenge">Kwota</string>
-    <string name="hint_target_new_challenge">Cel (opcjonalnie)</string>
-    <string name="hint_weeks_new_challenge">Liczba składek</string>
-    <string name="hint_currency_new_challenge">Waluta</string>
-    <string name="about_app">O aplikacji</string>
-    <string name="notify_settings">Ustaw powiadomienia</string>
+    <string name="label_new_challenge">New challenge</string>
+    <string name="hint_amount_new_challenge">Amount</string>
+    <string name="hint_target_new_challenge">Purpose (optional)</string>
+    <string name="hint_weeks_new_challenge">Dues number</string>
+    <string name="hint_currency_new_challenge">Currency</string>
+    <string name="about_app">About app</string>
+    <string name="notify_settings">Set notifications</string>
     <string name="default_amount_new_challenge">1000</string>
     <string name="default_weeks_new_challenge">12</string>
-    <string name="button_apply_new_challenge">Rozpocznij</string>
-    <string name="button_advanced_settings_new_challenge">Dostosuj</string>
-    <string name="label_intro">Czym jest Money Saving Challenge?</string>
-    <string name="button_cancel">Anuluj</string>
-    <string name="new_challenge_label">Nowe wyzwanie</string>
-    <string name="current_challenge_label">Obecne wyzwanie</string>
-    <string name="history_label">Historia</string>
-    <string name="no_active_challenge_label">Brak aktywnego wyzwania</string>
+    <string name="button_apply_new_challenge">Start</string>
+    <string name="button_advanced_settings_new_challenge">Customize</string>
+    <string name="label_intro">What is Money Saving Challenge?</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="new_challenge_label">New challenge</string>
+    <string name="current_challenge_label">Current challenge</string>
+    <string name="history_label">History</string>
+    <string name="no_active_challenge_label">No active challenge</string>
     <string name="content_intro">
-        Money Saving Challenge ma pomóc Ci w regularnym oszczędzaniu pieniędzy na cel, który sobie wyznaczysz.
-        Na podstawie kwoty i czasu, w jakim chcesz uzbierać wybraną sumę, aplikacja wyznacza wysokość składek, jakie trzeba co tydzień odłozyć.
-        Po wystartowaniu wyzwania, raz w tygodniu pojawią się przypomnienia z kwotą do odłożenia.
-    </string>
-    <string name="target_show_label"><u>Cel:</u></string>
-    <string name="amount_show_label_underline"><u>Kwota:</u></string>
-    <string name="amount_show_label">Kwota:</string>
-    <string name="saved_show_label"><u>Uzbierane:</u></string>
-    <string name="dues_label">Składki:</string>
-    <string name="current_due_label"><u>Składka:</u></string>
-    <string name="due_separator">/</string>
-    <string name="confirm_dialog_title">Nie ukończyłeś wyzwania</string>
-    <string name="confirm_dialog_content">Nie skończyłeś ostatniego wyzwania! Rozpocząć nowy mimo to?</string>
-    <string name="answer_yes">Tak</string>
-    <string name="answer_no">Nie</string>
-    <string name="date_start_label">Data rozpoczęcia:</string>
-    <string name="date_finish_label">Data zakończenia:</string>
-    <string name="history_detail_label">Wyzwanie #</string>
-    <string name="status_canceled">anulowane</string>
-    <string name="status_in_progress">w trakcie</string>
-    <string name="remove_alert_title">Usuwanie wyzwania</string>
-    <string name="remove_alert_content">Czy na pewno chcesz usunąć wyzwanie z historii?</string>
-    <string name="challenge_completed">Wyzwanie ukończone!</string>
+        Money Saving Challenge has inspired by popular internet challenge that aims at saving $1000 in 12 weeks.
+        App allow check and observe progress in challenge and customize time and amount. Based on amount and time, app calculate dues.
+        Additionally you can activate notifications, which help you in regular saving.
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="notification_switch">Powiadomienia</string>
-    <string name="notify_weekly_radio">Co tydzień</string>
-    <string name="notify_monthly_radio">Co miesiąc</string>
-    <string name="notify_weekday_label">Wybierz dzień tygodnia</string>
-    <string name="notify_monthday_label">Wybierz dzień miesiąca</string>
-    <string name="notify_interval_label">Wybierz częstotliwość przypomnień</string>
-    <string name="notify_hour_label">Wybierz godzinę przypomnienia</string>
-    <string name="save_button">Zapisz</string>
+    </string>
+    <string name="target_show_label"><u>Purpose:</u></string>
+    <string name="amount_show_label_underline"><u>Amount:</u></string>
+    <string name="amount_show_label">Amount:</string>
+    <string name="saved_show_label"><u>Saved:</u></string>
+    <string name="dues_label">Dues:</string>
+    <string name="current_due_label"><u>Due:</u></string>
+    <string name="due_separator">/</string>
+    <string name="confirm_dialog_title">Challenge not finished</string>
+    <string name="confirm_dialog_content">You don\'t finish last challenge! Start new anyway?</string>
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+    <string name="date_start_label">Start date:</string>
+    <string name="date_finish_label">Finish date:</string>
+    <string name="history_detail_label">Challenge #</string>
+    <string name="status_canceled">canceled</string>
+    <string name="status_in_progress">in progress</string>
+    <string name="remove_alert_title">Delete challenge</string>
+    <string name="remove_alert_content">Delete challenge from history?</string>
+    <string name="challenge_completed">Challenge completed!</string>
+    <string name="notification_switch">Notifications</string>
+    <string name="notify_weekly_radio">Weekly</string>
+    <string name="notify_monthly_radio">Monthly</string>
+    <string name="notify_weekday_label">Set of week</string>
+    <string name="notify_monthday_label">Set of month</string>
+    <string name="notify_interval_label">Set interval</string>
+    <string name="notify_hour_label">Set hour</string>
+    <string name="save_button">Save</string>
+    <string name="due_to_save_label">You should save:</string>
 </resources>

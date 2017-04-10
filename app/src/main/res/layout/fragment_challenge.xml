@@ -226,7 +226,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
-        android:text="co łaska, ale nie mniej niż:"
+        android:text="@string/due_to_save_label"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/due_amount"
         app:layout_constraintHorizontal_bias="0.505"

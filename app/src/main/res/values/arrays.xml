@@ -18,13 +18,13 @@
     </string-array>
 
     <string-array name="days_of_week">
-        <item value="1">Niedziela</item>
-        <item value="2">Poniedziałek</item>
-        <item value="3">Wtorek</item>
-        <item value="4">Środa</item>
-        <item value="5">Czwartek</item>
-        <item value="6">Piątek</item>
-        <item value="7">Sobota</item>
+        <item value="1">Sunday</item>
+        <item value="2">Monday</item>
+        <item value="3">Tuesday</item>
+        <item value="4">Wednesday</item>
+        <item value="5">Thursday</item>
+        <item value="6">Friday</item>
+        <item value="7">Saturday</item>
     </string-array>
 
 </resources>
