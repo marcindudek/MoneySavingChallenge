@@ -35,9 +35,6 @@ import static pl.dweb.moneysavingchallenge.MainActivity.CURRENT_CHALLENGE;
 import static pl.dweb.moneysavingchallenge.MainActivity.SHARED_PREFERENCES_NAME;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewChallengeFragment extends Fragment {
 
     @BindView(R.id.amount)
@@ -66,7 +63,6 @@ public class NewChallengeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_new_challenge, container, false);
         ButterKnife.bind(this, v);
         preferences = getContext().getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);

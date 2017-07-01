@@ -1,7 +1,6 @@
 package pl.dweb.moneysavingchallenge;
 
 import android.content.Intent;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -83,7 +82,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
             String finishDate = (challenge.getFinishTimestamp() != null) ? sdf.format(challenge.getFinishTimestamp()) : getString(R.string.status_canceled);
             finishDateField.setText(finishDate);
 
-            DetailsAdapter adapter = new DetailsAdapter(dues, this, challenge.getCurrency());
+            DetailsAdapter adapter = new DetailsAdapter(dues, challenge.getCurrency());
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -103,7 +102,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
             case R.id.action_about:
                 startActivity(new Intent(this, IntroductionActivity.class));
                 break;
-            case R.id.action_search:
+            case R.id.action_notify:
 //              startActivity(new Intent(this, SearchNewsActivity.class));
                 break;
         }

@@ -19,16 +19,10 @@ import pl.dweb.moneysavingchallenge.model.DueEntity;
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsHolder> {
 
     List<DueEntity> list;
-    private Context context;
     private String currency;
 
-    public DetailsAdapter(Context context) {
-        this.context = context;
-    }
-
-    public DetailsAdapter(List<DueEntity> list, Context context, String currency) {
+    public DetailsAdapter(List<DueEntity> list, String currency) {
         this.list = list;
-        this.context = context;
         this.currency = currency;
     }
 

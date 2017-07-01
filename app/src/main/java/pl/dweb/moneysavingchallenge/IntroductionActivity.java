@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -37,11 +36,13 @@ public class IntroductionActivity extends AppCompatActivity {
             case R.id.action_about:
                 startActivity(new Intent(this, IntroductionActivity.class));
                 break;
-            case R.id.action_search:
-//              startActivity(new Intent(this, SearchNewsActivity.class));
+            case R.id.action_notify:
+
+                startActivity(new Intent(this, NotificationSettingsActivity.class));
                 break;
         }
         return true;
+
     }
 
 }

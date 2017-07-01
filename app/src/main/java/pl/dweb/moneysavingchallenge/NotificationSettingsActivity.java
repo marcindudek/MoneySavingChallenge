@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -103,7 +102,7 @@ public class NotificationSettingsActivity extends AppCompatActivity {
             case R.id.action_about:
                 startActivity(new Intent(this, IntroductionActivity.class));
                 break;
-            case R.id.action_search:
+            case R.id.action_notify:
 //              startActivity(new Intent(this, SearchNewsActivity.class));
                 break;
         }

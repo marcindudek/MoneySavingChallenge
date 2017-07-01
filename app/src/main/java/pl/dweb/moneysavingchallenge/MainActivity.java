@@ -1,14 +1,8 @@
 package pl.dweb.moneysavingchallenge;
 
-import android.app.AlarmManager;
-import android.app.Dialog;
-import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,31 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.Job;
-import com.firebase.jobdispatcher.Lifetime;
-import com.firebase.jobdispatcher.Trigger;
-
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -74,12 +48,6 @@ public class MainActivity extends AppCompatActivity {
         int startPosition = (preferences.contains(CURRENT_CHALLENGE)) ? 1 : 0;
         viewPager.setCurrentItem(startPosition);
 
-//        Intent intent = new Intent(this, Receiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-//        am.setRepeating(am.RTC_WAKEUP, System.currentTimeMillis(), am.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
-
-
     }
 
     @Override
@@ -94,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_about:
                 startActivity(new Intent(this, IntroductionActivity.class));
                 break;
-            case R.id.action_search:
+            case R.id.action_notify:
 
               startActivity(new Intent(this, NotificationSettingsActivity.class));
               break;
