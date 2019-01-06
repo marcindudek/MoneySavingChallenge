@@ -1,15 +1,9 @@
-package pl.dweb.moneysavingchallenge.model;
-
-import android.support.v4.app.INotificationSideChannel;
+package sh.mazurkiewicz.msc.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
-
-/**
- * Created by md on 3/28/17.
- */
 
 @DatabaseTable(tableName = "challenges")
 public class ChallengeEntity {

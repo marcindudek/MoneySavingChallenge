@@ -1,8 +1,4 @@
-package pl.dweb.moneysavingchallenge.model;
-
-/**
- * Created by md on 4/5/17.
- */
+package sh.mazurkiewicz.msc.model;
 
 public class ChallengeFinisher {
     private Integer id;

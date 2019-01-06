@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -12,9 +12,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-/**
- * Created by md on 3/31/17.
- */
 
 public class CircularProgressBar extends View {
 

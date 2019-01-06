@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="32dp"
-    tools:context="pl.dweb.moneysavingchallenge.ChallengeFragment">
+    tools:context="pl.dweb.msc.sh.mazurkiewicz.msc.ChallengeFragment">
 
 
-    <pl.dweb.moneysavingchallenge.CircularProgressBar
+    <sh.mazurkiewicz.msc.CircularProgressBar
         android:id="@+id/progressBar"
         android:layout_width="170dp"
         android:layout_height="170dp"

@@ -37,13 +37,13 @@
     <string name="answer_no">Nie</string>
     <string name="date_start_label">Data rozpoczęcia:</string>
     <string name="date_finish_label">Data zakończenia:</string>
+    <string name="status_label">Status:</string>
     <string name="history_detail_label">Wyzwanie #</string>
     <string name="status_canceled">anulowane</string>
     <string name="status_in_progress">w trakcie</string>
     <string name="remove_alert_title">Usuwanie wyzwania</string>
     <string name="remove_alert_content">Czy na pewno chcesz usunąć wyzwanie z historii?</string>
     <string name="challenge_completed">Wyzwanie ukończone!</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notification_switch">Powiadomienia</string>
     <string name="notify_weekly_radio">Co tydzień</string>
     <string name="notify_monthly_radio">Co miesiąc</string>

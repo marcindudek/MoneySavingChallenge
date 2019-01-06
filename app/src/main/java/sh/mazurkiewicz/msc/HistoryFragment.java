@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 
 import android.content.DialogInterface;
@@ -10,10 +10,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -27,15 +25,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.dweb.moneysavingchallenge.database.DBHelper;
-import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
-import pl.dweb.moneysavingchallenge.model.ChallengeFinisher;
-import pl.dweb.moneysavingchallenge.model.DueEntity;
+import sh.mazurkiewicz.msc.database.DBHelper;
+import sh.mazurkiewicz.msc.model.ChallengeEntity;
+import sh.mazurkiewicz.msc.model.ChallengeFinisher;
+import sh.mazurkiewicz.msc.model.DueEntity;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HistoryFragment extends Fragment implements ChallengesAdapter.OnItemClickListener {
 
     @BindView(R.id.history_recycler_view)

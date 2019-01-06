@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
-
-/**
- * Created by md on 3/29/17.
- */
+import sh.mazurkiewicz.msc.model.ChallengeEntity;
 
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.ChallengesHolder> {
 

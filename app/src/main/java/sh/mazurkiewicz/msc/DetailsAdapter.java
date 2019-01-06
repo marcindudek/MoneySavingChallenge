@@ -1,6 +1,5 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +9,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import pl.dweb.moneysavingchallenge.model.DueEntity;
-
-/**
- * Created by md on 4/8/17.
- */
+import sh.mazurkiewicz.msc.model.DueEntity;
 
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsHolder> {
 

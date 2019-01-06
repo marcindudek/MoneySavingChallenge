@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "pl.dweb.moneysavingchallenge";
+    public static final String TAG = "sh.mazurkiewicz.msc";
     public static final String SHARED_PREFERENCES_NAME = "msc.preferences";
     public static final String CURRENT_CHALLENGE = "current_challenge";
 

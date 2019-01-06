@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +20,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.dweb.moneysavingchallenge.database.DBHelper;
-import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
-import pl.dweb.moneysavingchallenge.model.DueEntity;
+import sh.mazurkiewicz.msc.database.DBHelper;
+import sh.mazurkiewicz.msc.model.ChallengeEntity;
+import sh.mazurkiewicz.msc.model.DueEntity;
 
 public class HistoryDetailActivity extends AppCompatActivity {
 
@@ -43,6 +43,9 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.history_detail_finish_date)
     TextView finishDateField;
+
+    @BindView(R.id.history_detail_finish_label)
+    TextView finishDateLabelField;
 
     @BindView(R.id.detailRecycler)
     RecyclerView recyclerView;
@@ -79,7 +82,10 @@ public class HistoryDetailActivity extends AppCompatActivity {
             amountField.setText(challenge.getAmount() + " " + challenge.getCurrency());
             duesField.setText(challenge.getDues().toString());
             startDateField.setText(sdf.format(challenge.getStartTimestamp()));
-            String finishDate = (challenge.getFinishTimestamp() != null) ? sdf.format(challenge.getFinishTimestamp()) : getString(R.string.status_canceled);
+            String finishDateLabel = (challenge.getFinishTimestamp() != null) ? getString(R.string.date_finish_label) : getString(R.string.status_label);
+            String finishDate = (challenge.getFinishTimestamp() != null) ? sdf.format(challenge.getFinishTimestamp()) :
+                    challenge.getCanceled() ? getString(R.string.status_canceled) : getString(R.string.status_in_progress);
+            finishDateLabelField.setText(finishDateLabel);
             finishDateField.setText(finishDate);
 
             DetailsAdapter adapter = new DetailsAdapter(dues, challenge.getCurrency());

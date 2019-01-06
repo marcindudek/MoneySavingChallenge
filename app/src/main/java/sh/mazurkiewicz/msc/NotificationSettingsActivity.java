@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static pl.dweb.moneysavingchallenge.MainActivity.SHARED_PREFERENCES_NAME;
+import static sh.mazurkiewicz.msc.MainActivity.SHARED_PREFERENCES_NAME;
 
 public class NotificationSettingsActivity extends AppCompatActivity {
 

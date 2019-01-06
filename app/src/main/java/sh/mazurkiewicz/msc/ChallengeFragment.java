@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 
 import android.app.AlarmManager;
@@ -30,19 +30,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import pl.dweb.moneysavingchallenge.database.DBHelper;
-import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
-import pl.dweb.moneysavingchallenge.model.ChallengeFinisher;
-import pl.dweb.moneysavingchallenge.model.DueEntity;
+import sh.mazurkiewicz.msc.database.DBHelper;
+import sh.mazurkiewicz.msc.model.ChallengeEntity;
+import sh.mazurkiewicz.msc.model.ChallengeFinisher;
+import sh.mazurkiewicz.msc.model.DueEntity;
 
 import static android.content.Context.MODE_PRIVATE;
-import static pl.dweb.moneysavingchallenge.MainActivity.CURRENT_CHALLENGE;
-import static pl.dweb.moneysavingchallenge.MainActivity.SHARED_PREFERENCES_NAME;
+import static sh.mazurkiewicz.msc.MainActivity.CURRENT_CHALLENGE;
+import static sh.mazurkiewicz.msc.MainActivity.SHARED_PREFERENCES_NAME;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ChallengeFragment extends Fragment {
 
 

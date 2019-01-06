@@ -36,6 +36,7 @@
     <string name="answer_no">No</string>
     <string name="date_start_label">Start date:</string>
     <string name="date_finish_label">Finish date:</string>
+    <string name="status_label">Status:</string>
     <string name="history_detail_label">Challenge #</string>
     <string name="status_canceled">canceled</string>
     <string name="status_in_progress">in progress</string>

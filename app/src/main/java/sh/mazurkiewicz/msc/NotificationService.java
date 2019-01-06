@@ -1,4 +1,4 @@
-package pl.dweb.moneysavingchallenge;
+package sh.mazurkiewicz.msc;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,10 +8,6 @@ import android.content.Intent;
 
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
-
-/**
- * Created by Admin on 01.04.2017.
- */
 
 public class NotificationService extends JobService {
 

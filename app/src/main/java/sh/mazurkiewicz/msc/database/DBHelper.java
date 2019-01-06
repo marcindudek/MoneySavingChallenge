@@ -1,8 +1,7 @@
-package pl.dweb.moneysavingchallenge.database;
+package sh.mazurkiewicz.msc.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -11,12 +10,8 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
-import pl.dweb.moneysavingchallenge.model.ChallengeEntity;
-import pl.dweb.moneysavingchallenge.model.DueEntity;
-
-/**
- * Created by md on 3/28/17.
- */
+import sh.mazurkiewicz.msc.model.ChallengeEntity;
+import sh.mazurkiewicz.msc.model.DueEntity;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
     private static final String DB_NAME = "challenges.db";
